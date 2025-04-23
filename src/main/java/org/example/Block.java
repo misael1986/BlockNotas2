@@ -56,7 +56,7 @@ public class Block extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button_guardar && !this.nombretxt.getText().isEmpty()) {
             try {
-            File archivo = new File("/Users/misael.perilla/Desktop/"+this.nombretxt.getText()+".txt");
+            File archivo = new File("C:\\Users\\Usuario\\IdeaProjects\\"+this.nombretxt.getText()+".txt");
             FileWriter fw = new FileWriter(archivo);
             fw.append(textArea.getText());
             fw.close();
@@ -69,8 +69,19 @@ public class Block extends JFrame implements ActionListener {
             textArea.setText("");
         }
         if (e.getSource() == button_cambiar_color) {
-            this.textArea.setForeground(new Color(220,5,45));
+            Color color= null;
+            JColorChooser colorChooser = new JColorChooser();
+            int resultado = JOptionPane.showConfirmDialog(null, colorChooser, "Selecciona un color", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (resultado == JOptionPane.OK_OPTION) {
+                color = colorChooser.getColor();
+                System.out.println("El color seleccionado es " + color.toString());
+            } else {
+                System.out.println("No se seleccionó ningún color.");
+            }
+            this.textArea.setForeground(color);
         }
+
+
 
         if (e.getSource() == button_eliminar_color) {
             this.textArea.setForeground(Color.BLACK);
